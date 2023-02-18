@@ -1,2 +1,18 @@
-//Require axios to make API calls
 const axios = require("axios");
+const gotBaseURL = "https://api.unsplash.com/photos";
+const unsplashAK = process.env.UNSPLASH_ACCESS_KEY;
+
+const getPhotos = async (req, res, next) => {
+  try {
+    const response = await axios.get(
+      `${gotBaseURL}?client_id=${unsplashAK}`
+    );
+    const photos = response.data.map((photo) => photo.urls.raw);
+    res.status(200).json(photos);
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({error: "Server error. Please try again later."});
+  }
+};
+
+module.exports = { getPhotos };
