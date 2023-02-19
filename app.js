@@ -1,5 +1,5 @@
 require('dotenv').config()
-const photoRoutes = require("./routes/photoRoutes.js")
+const allPhotoRoutes = require("./routes/photoRoutes.js")
 const express = require('express')
 
 const app = express()
@@ -11,7 +11,7 @@ app.use ((req, res, next) => {
     next()
 })
 
-app.use('/api/photos', photoRoutes);
+app.use('/api/photos', allPhotoRoutes);
 app.get('/', (req, res) => {
     res.json({message: "Welcome to the Unsplash API!"})
 })
