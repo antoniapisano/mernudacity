@@ -27,6 +27,19 @@ const getSinglePhoto = async (req, res, next) => {
       res.status(400).json({ error: "Server error. Please try again later." });
     }
   };
+
+  const getUsernamePhoto = async (req, res, next) => {
+    const username = req.params.username;
+    try {
+      const response = await axios.get(`${gotBaseURL}user/${username}${clientId}${unsplashAK}`);
+      const photo = response.data.map((photo) =>
+      photo.params [id, username, description, urls.raw]);
+      res.status(200).json(photo);
+    } catch (err) {
+      console.log(err);
+      res.status(400).json({ error: "Server error. Please try again later." });
+    }
+  };
   
 
-module.exports = { getPhotos, getSinglePhoto };
+module.exports = { getPhotos, getSinglePhoto, getUsernamePhoto };
