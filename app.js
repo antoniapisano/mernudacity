@@ -2,7 +2,10 @@ require('dotenv').config()
 const express = require('express')
 const allPhotoRoutes = require("./routes/photoRoutes.js")
 const allUserRoutes = require("./routes/userRoutes.js")
-const { errorHandler } = require('./middleware/errorMiddleware');
+const { errorHandler } = require('./middleware/errorMiddleware')
+const connectDB = require('./config/db')
+
+connectDB();
 
 const app = express()
 
@@ -14,7 +17,7 @@ app.use ((req, res, next) => {
     next()
 })
 
-app.use('/api', allPhotoRoutes );
+app.use('/api/photos', allPhotoRoutes );
 app.use('/api/users', allUserRoutes );
 
 app.use(errorHandler);

@@ -4,7 +4,7 @@ const {getPhotos, getSinglePhoto, getUsernamePhoto} = require("../controllers/ph
 
 router.get("/", getPhotos);
 router.get("/:id", getSinglePhoto);
-router.get("/users/:username", getUsernamePhoto);
+router.get("/user/:username", getUsernamePhoto);
 
 
 
