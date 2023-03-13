@@ -9,7 +9,7 @@ const getPhotos = async (req, res, next) => {
       `${gotBaseURL}photos/${clientId}${unsplashAK}`
     );
     const photos = response.data.map((photo) => photo.urls.raw);
-    res.status(200).json(photos);
+    res.status(200).json({photos});
   } catch (err) {
     console.log(err);
     res.status(400).json({error: "Server error. Please try again later."});
