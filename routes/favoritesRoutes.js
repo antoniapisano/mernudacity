@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const { protect } = require('../middleware/authMiddleware')
-const { getFave, setFave, deleteFave, updateFave } = require('controllers/favoritesController.js')
+const { addFave, getFave, removeFave, editFave } = require('controllers/favoritesController.js')
 
-router.get('/',protect, getFave)
-router.post('/', protect, setFave)
-router.delete('/:id', protect, deleteFave)
-router.put('/:id', protect, updateFave)
+router.post('/', protect, addFave)
+router.get('/', protect, getFave)
+router.delete('/:id', protect, removeFave)
+router.put('/:id', protect, editFave)
 
 module.exports = router

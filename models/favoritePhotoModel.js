@@ -2,8 +2,9 @@ const mongoose = require('mongoose')
 const faveSchema = mongoose.Schema(
   {
     user: {
-      type: String,
-      require: true,
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User',      
     },
     url: {
       type: String,
@@ -17,6 +18,10 @@ const faveSchema = mongoose.Schema(
       type: String,
       require: true,
     },
+    explanation: {
+        type: String,
+        require: false,
+      },
   },
 );
 
