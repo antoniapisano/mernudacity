@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { protect } = require('../middleware/authMiddleware')
-const { addFave, getFave, removeFave, editFave } = require('controllers/favoritesController.js')
+const { addFave, getFave, removeFave, editFave } = require('../controllers/favoritesController.js')
 
 router.post('/', protect, addFave)
 router.get('/', protect, getFave)

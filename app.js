@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const allPhotoRoutes = require("./routes/photoRoutes.js")
 const allUserRoutes = require("./routes/userRoutes.js")
+const allFaveRoutes = require("./routes/favoritesRoutes.js")
 const { errorHandler } = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
 
@@ -19,6 +20,7 @@ app.use ((req, res, next) => {
 
 app.use('/api/photos', allPhotoRoutes );
 app.use('/api/users', allUserRoutes );
+app.use('/api/favorites', allFaveRoutes);
 
 app.use(errorHandler);
 

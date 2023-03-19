@@ -1,5 +1,4 @@
 const asyncHandler = require('express-async-handler')
-
 const Favourites = require('../models/favoritePhotoModel.js')
 
 const addFave = asyncHandler(async (req, res) => {
