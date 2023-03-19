@@ -3,6 +3,10 @@ const Favourites = require('../models/favoritePhotoModel.js')
 
 const addFave = asyncHandler(async (req, res) => {
     const faves = await Favourites.create({ user, url, description, username, explanation })
+    if (!user || !url || !description || !username || !explanation) {
+      res.status(400);
+      throw new Error("Please complete all fields");
+    }
     res.status(200).json({faves})
   })
   
@@ -10,7 +14,10 @@ const addFave = asyncHandler(async (req, res) => {
 
 const getFave = asyncHandler(async (req, res) => {
   const faves = await Favourites.find({ user: req.user.id })
-
+  if (faves.user.toString() !== req.user.id) {
+    res.status(401)
+    throw new Error('User not found')
+  }
   res.status(200).json({faves})
 })
 
