@@ -20,7 +20,7 @@ app.use ((req, res, next) => {
 
 app.use('/api/photos', allPhotoRoutes );
 app.use('/api/users', allUserRoutes );
-app.use('/api/favorites', allFaveRoutes);
+app.use('/api/favourites', allFaveRoutes);
 
 app.use(errorHandler);
 

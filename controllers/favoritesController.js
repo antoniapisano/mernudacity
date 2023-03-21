@@ -2,13 +2,23 @@ const asyncHandler = require('express-async-handler')
 const Favourites = require('../models/favoritePhotoModel.js')
 
 const addFave = asyncHandler(async (req, res) => {
-    const faves = await Favourites.create({ user, url, description, username, explanation })
-    if (!user || !url || !description || !username || !explanation) {
-      res.status(400);
-      throw new Error("Please complete all fields");
-    }
-    res.status(200).json({faves})
-  })
+  const { user, url, description, username, explanation } = req.body;
+
+  if (!user || !url || !description || !username || !explanation) {
+    res.status(400);
+    throw new Error("Please make sure that all fields are completed");
+  }
+
+  const newPhoto = await favoritePhoto.create({
+    user,
+    url,
+    description,
+    username,
+    explanation,
+  });
+
+  res.status(200).json({ Message: "Added to Favorites", newPhoto });
+});
   
 
 
