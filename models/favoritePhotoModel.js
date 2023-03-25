@@ -8,21 +8,25 @@ const faveSchema = mongoose.Schema(
     },
     url: {
       type: String,
-      require: [true, "Please add a url"],
+      require: true,
     },
     description: {
       type: String,
-      require: [true, "Please add a description"],
+      require: true,
     },
     username: {
       type: String,
-      require: [true, "Please add a username"],
+      require: true,
     },
+
     explanation: {
-        type: String,
-        require: [true, "Please add an explanation"],
-      },
+      type: String,
+      require: true,
+    },
   },
+  {
+    timestamps: true,
+  }
 );
 
-module.exports = mongoose.model('Favourites', faveSchema);
+module.exports = mongoose.model('Favorites', faveSchema);

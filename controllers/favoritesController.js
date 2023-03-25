@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler')
-const Favourites = require('../models/favoritePhotoModel.js')
+const Favorites = require('../models/favoritePhotoModel.js')
 
 const addFave = asyncHandler(async (req, res) => {
   const { user, url, description, username, explanation } = req.body;
@@ -9,34 +9,25 @@ const addFave = asyncHandler(async (req, res) => {
     throw new Error("Please make sure that all fields are completed");
   }
 
-  const newPhoto = await favoritePhoto.create({
-    user,
-    url,
-    description,
-    username,
-    explanation,
-  });
+  const newFave = await Favorites.create({user, url, description, username, explanation,});
 
-  res.status(200).json({ Message: "Added to Favorites", newPhoto });
+  res.status(200).json({ Message: "Added to Favorites", newFave });
 });
   
 
 
 const getFave = asyncHandler(async (req, res) => {
-  const faves = await Favourites.find({ user: req.user.id })
-  if (faves.user.toString() !== req.user.id) {
-    res.status(401)
-    throw new Error('User not found')
-  }
-  res.status(200).json({faves})
-})
+  const faves = await Favorites.find({ user: req.user.id });
+
+  res.status(200).json({ faves });
+});
 
 const removeFave = asyncHandler(async (req, res) => {
-    const faves = await Favourites.findById(req.params.id)
+    const faves = await Favorites.findById(req.params.id)
   
     if (!faves) {
       res.status(400)
-      throw new Error('Favourite photo not found')
+      throw new Error('Favorite photo not found')
     }
   
     if (!req.user) {
@@ -55,11 +46,11 @@ const removeFave = asyncHandler(async (req, res) => {
   })
 
   const editFave = asyncHandler(async (req, res) => {
-    const faves = await Favourites.findById(req.params.id)
+    const faves = await Favorites.findById(req.params.id)
   
     if (!faves) {
       res.status(400)
-      throw new Error('Favourite photo not found')
+      throw new Error('Favorite photo not found')
     }
   
     if (!req.user) {
@@ -72,7 +63,7 @@ const removeFave = asyncHandler(async (req, res) => {
       throw new Error('User not authorized')
     }
   
-    const editedFave = await Favourites.findByIdAndUpdate(req.params.id, req.body, {
+    const editedFave = await Favorites.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     })
   
