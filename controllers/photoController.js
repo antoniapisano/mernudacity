@@ -4,6 +4,19 @@ const unsplashAK = process.env.UNSPLASH_ACCESS_KEY;
 const clientId = "?client_id="
 
 
+const noPhotoApi = async (req, res, next) => {
+  try {
+    await axios.get(
+      `$photos/`
+    );
+    res.status(200).json({message: "Please connect to api"});
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({error: "Server error. Please try again later."});
+  }
+};
+
+
 
 const getPhotos = async (req, res, next) => {
   try {
@@ -14,7 +27,7 @@ const getPhotos = async (req, res, next) => {
     res.status(200).json(photos);
   } catch (err) {
     console.log(err);
-    res.status(400).json({error: "Server error. Please try again later."});
+    res.status(500).json({error: "Server error. Please try again later."});
   }
 };
 
@@ -26,7 +39,7 @@ const getSinglePhoto = async (req, res, next) => {
       res.status(200).json({photo});
     } catch (err) {
       console.log(err);
-      res.status(400).json({ error: "Server error. Please try again later." });
+      res.status(500).json({ error: "Server error. Please try again later." });
     }
   };
 
@@ -47,4 +60,4 @@ const getSinglePhoto = async (req, res, next) => {
   };
   
 
-module.exports = { getPhotos, getSinglePhoto, getUsernamePhoto };
+module.exports = { noPhotoApi, getPhotos, getSinglePhoto, getUsernamePhoto };
